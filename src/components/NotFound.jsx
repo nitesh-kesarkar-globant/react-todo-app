@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function NotFound({ message, status, linkText = "", link = "" }) {
+function NotFound({ message, status, linkText, link }) {
   return (
     <div
       className={`alert alert-${status} d-flex justify-content-between align-items-center`}

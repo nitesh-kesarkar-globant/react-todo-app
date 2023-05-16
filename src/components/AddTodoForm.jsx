@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { addPost } from "../utils/localStorageUtil";
 
 function AddTodoForm() {
+  const [valid, setValid] = useState(false);
   const [todo, setPost] = useState({
     title: "",
     body: "",
   });
-  const [valid, setValid] = useState(false);
 
   useEffect(() => {
     if (todo.title.length > 0 && todo.body.length > 0) {

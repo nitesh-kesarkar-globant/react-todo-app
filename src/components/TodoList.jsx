@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { deletePost } from "../utils/localStorageUtil";
 import useTodos from "../hooks/useTodos";
-
 import Card from "./Card";
 import NotFound from "./NotFound";
 import LoadingSpinner from "./LoadingSpinner";
@@ -41,7 +40,7 @@ function TodoList() {
       {todos?.length > 0 && (
         <div className="row">
           {todos.map((todo) => (
-            <div className="col-4" key={todo.id}>
+            <div className="col-md-4 col-sm-12" key={todo.id}>
               <Card todo={todo} handleDelete={handleDelete} />
             </div>
           ))}

@@ -1,23 +1,27 @@
-
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import TodoList from "./components/TodoList";
-import AddTodoForm from "./components/AddTodoForm";
-import EditTodoForm from "./components/EditTodoForm";
-import Navbar from "./components/Navbar";
+const LoadingSpinner = lazy(() => import('./components/LoadingSpinner'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const AuthenticatedPages = lazy(() => import("./pages/AuthenticatedPages"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const EditTodoForm = lazy(() => import('./components/EditTodoForm'));
+const AddTodoForm = lazy(() => import('./components/AddTodoForm'));
+const TodoList = lazy(() => import('./components/TodoList'));
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <div className="container">
-        <div className="container p-5">
-          <Routes>
-            <Route exact path="/" element={<TodoList />} />
-            <Route exact path="/add" element={<AddTodoForm />} />
-            <Route exact path="/edit/:id" element={<EditTodoForm />} />
-          </Routes>
-        </div>
-      </div>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Routes>
+          <Route exact path="/" element={<LoginPage />} />
+          <Route exact path="/todos" element={<AuthenticatedPages />}>
+            <Route exact path="" element={<TodoList />} />
+            <Route exact path="add" element={<AddTodoForm />} />
+            <Route exact path="edit/:id" element={<EditTodoForm />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

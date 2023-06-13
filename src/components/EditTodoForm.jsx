@@ -15,10 +15,10 @@ function EditTodoForm() {
     const existingPost = searchPostById(id);
 
     if (!existingPost) {
-      navigate("/");
+      navigate(-1);
     }
     setPost(searchPostById(id));
-  }, []);
+  }, [navigate, id]);
 
   const handleSubmit = () => {
     const updatedPost = {
@@ -27,7 +27,7 @@ function EditTodoForm() {
       body: todo.body,
     };
     editPost(updatedPost);
-    navigate("/");
+    navigate(-1);
   };
 
   return (

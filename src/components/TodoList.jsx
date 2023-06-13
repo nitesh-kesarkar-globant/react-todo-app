@@ -24,7 +24,7 @@ function TodoList() {
     <div>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2>Todos</h2>
-        <Link to="/add" className="btn btn-sm btn-success">
+        <Link to="add" className="btn btn-sm btn-success">
           Add Todo
         </Link>
       </div>

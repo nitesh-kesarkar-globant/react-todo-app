@@ -27,7 +27,7 @@ function AddTodoForm() {
     };
 
     addPost(newPost);
-    navigate("/");
+    navigate(-1);
   };
 
   return (

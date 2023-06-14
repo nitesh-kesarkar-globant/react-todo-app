@@ -1,8 +1,19 @@
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useMatch, useNavigate } from "react-router-dom"
 import { AuthContext } from '../contexts/AuthContext';
 
-const Navbar = () => {
+function LinkItem({ text, url }) {
+    const match = useMatch(url);
+
+    return (
+        <li className="nav-item">
+            <Link to={url} className="text-decoration-none"><span className={`nav-link ${match ? "active" : ""}`}>{text}</span></Link>
+        </li>
+    )
+}
+
+
+function Navbar () {
     const navigate = useNavigate();
     const { user, clearAuthenticatedUser } = useContext(AuthContext);
 
@@ -23,14 +34,17 @@ const Navbar = () => {
                     {
                         user && (
                             <>
-                                <li className="nav-item">
-                                    <button className="btn btn-primary btn-sm" onClick={() => handleLogin()}>Log In</button>
-                                </li>
+                                <LinkItem text="My" url="/my"/>
+                                <LinkItem text="Todos" url="/todos"/>
+
                                 <li className="nav-item">
                                     <span className="nav-link">Hi, {user.name}</span>
                                 </li>
                                 <li className="nav-item">
                                     <button className="btn btn-primary btn-sm" onClick={() => handleLogout()}>Log Out</button>
+                                </li>
+                                <li className="nav-item ms-2">
+                                    <button className="btn btn-primary btn-sm" onClick={() => handleLogin()}>Log In</button>
                                 </li>
                             </>
 
@@ -43,4 +57,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default Navbar;

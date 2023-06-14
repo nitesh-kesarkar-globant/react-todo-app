@@ -7,6 +7,8 @@ const LoginPage = lazy(() => import("./pages/LoginPage"));
 const EditTodoForm = lazy(() => import('./components/EditTodoForm'));
 const AddTodoForm = lazy(() => import('./components/AddTodoForm'));
 const TodoList = lazy(() => import('./components/TodoList'));
+const MyPage = lazy(() => import('./components/MyPage'));
+const DetailsPage = lazy(() => import('./components/DetailsPage'));
 
 function App() {
   return (
@@ -19,6 +21,12 @@ function App() {
             <Route exact path="add" element={<AddTodoForm />} />
             <Route exact path="edit/:id" element={<EditTodoForm />} />
           </Route>
+
+          <Route exact path="/my" element={<AuthenticatedPages />}>
+            <Route exact path="" element={<MyPage />} />
+            <Route exact path="details" element={<DetailsPage />} />
+          </Route>
+
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
